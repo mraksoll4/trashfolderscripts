@@ -11,26 +11,26 @@
             background-color: #f9f9f9;
             text-align: center;
         }
-        #spinner {
+        .spinner {
             display: none;
             font-size: 18px;
             color: #555;
         }
-        #progress-container {
+        .progress-container {
             display: none;
             width: 100%;
             background-color: #f3f3f3;
             margin-top: 20px;
             border-radius: 5px;
         }
-        #progress-bar {
+        .progress-bar {
             width: 0%;
             height: 30px;
             background-color: #4caf50;
             border-radius: 5px;
             transition: width 0.5s ease;
         }
-        #generated-codes {
+        .generated-codes {
             margin-top: 20px;
             font-size: 18px;
             font-weight: bold;
@@ -64,89 +64,129 @@
         .copy-button {
             margin-left: 10px;
         }
-        #copy-all-button {
+        .copy-all-button {
             margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <h1>HamsterKombat Game Code Generator</h1>
-    <form id="generate-key-form">
-        <button type="submit" id="generate-button">Generate 4 codes</button>
-    </form>
-
-    <div id="spinner">Loading...</div>
-
-    <div id="progress-container">
-        <div id="progress-bar" aria-valuenow="0"></div>
+    
+    <div class="game-section" id="bike">
+        <h2>Bike</h2>
+        <button class="generate-button">Generate 4 codes</button>
+        <div class="spinner">Loading...</div>
+        <div class="progress-container">
+            <div class="progress-bar" aria-valuenow="0"></div>
+        </div>
+        <div class="generated-codes"></div>
+        <button class="copy-all-button" style="display: none;">Copy all</button>
     </div>
 
-    <div id="generated-codes" class="d-none"></div>
-    <button id="copy-all-button" class="d-none">Copy all</button>
+    <div class="game-section" id="cube">
+        <h2>Cube</h2>
+        <button class="generate-button">Generate 4 codes</button>
+        <div class="spinner">Loading...</div>
+        <div class="progress-container">
+            <div class="progress-bar" aria-valuenow="0"></div>
+        </div>
+        <div class="generated-codes"></div>
+        <button class="copy-all-button" style="display: none;">Copy all</button>
+    </div>
+
+    <div class="game-section" id="clone">
+        <h2>Clone</h2>
+        <button class="generate-button">Generate 4 codes</button>
+        <div class="spinner">Loading...</div>
+        <div class="progress-container">
+            <div class="progress-bar" aria-valuenow="0"></div>
+        </div>
+        <div class="generated-codes"></div>
+        <button class="copy-all-button" style="display: none;">Copy all</button>
+    </div>
+
+    <div class="game-section" id="train">
+        <h2>Train</h2>
+        <button class="generate-button">Generate 4 codes</button>
+        <div class="spinner">Loading...</div>
+        <div class="progress-container">
+            <div class="progress-bar" aria-valuenow="0"></div>
+        </div>
+        <div class="generated-codes"></div>
+        <button class="copy-all-button" style="display: none;">Copy all</button>
+    </div>
 
     <script>
-        document.getElementById("generate-key-form").addEventListener("submit", async function(o) {
-            o.preventDefault();
-            const generatedCodesDiv = document.getElementById("generated-codes");
-            const spinner = document.getElementById("spinner");
-            const progressContainer = document.getElementById("progress-container");
-            const generateButton = document.getElementById("generate-button");
-            const copyAllButton = document.getElementById("copy-all-button");
+        const gameData = {
+            bike: { token: "d28721be-fd2d-4b45-869e-9f253b554e50", promoId: "43e35910-c168-4634-ad4f-52fd764a843f", minWaitAfterLogin: 21000 },
+            cube: { token: "d1690a07-3780-4068-810f-9b5bbf2931b2", promoId: "b4170868-cef0-424f-8eb9-be0622e8e8e3", minWaitAfterLogin: 21000 },
+            clone: { token: "74ee0b5b-775e-4bee-974f-63e7f4d5bacb", promoId: "fe693b26-b342-4159-8808-15e3ff7f8767", minWaitAfterLogin: 120000 },
+            train: { token: "82647f43-3f87-402d-88dd-09a90025313f", promoId: "c4480ac7-e178-4973-8061-9ed5b2e17954", minWaitAfterLogin: 120000 }
+        };
 
-            // Initialize the interface
-            generatedCodesDiv.classList.add("d-none");
-            generatedCodesDiv.innerHTML = "";
-            spinner.classList.remove("d-none");
-            progressContainer.style.display = 'block'; // Show progress bar
-            updateProgressBar(0);
-            generateButton.disabled = true;
+        document.querySelectorAll(".generate-button").forEach(button => {
+            button.addEventListener("click", async function() {
+                const gameId = this.closest(".game-section").id;
+                const { token, promoId, minWaitAfterLogin } = gameData[gameId];
+                
+                const spinner = this.nextElementSibling;
+                const progressContainer = spinner.nextElementSibling;
+                const progressBar = progressContainer.querySelector(".progress-bar");
+                const generatedCodesDiv = progressContainer.nextElementSibling;
+                const copyAllButton = generatedCodesDiv.nextElementSibling;
 
-            try {
-                // Start parallel requests
-                const tokens = await Promise.all([authenticateClient(), authenticateClient(), authenticateClient(), authenticateClient()]);
-                updateProgressBar(25);
-                await Promise.all(tokens.map(token => registerEvent(token)));
-                updateProgressBar(50);
-                const codes = await Promise.all(tokens.map(token => createCode(token)));
-                updateProgressBar(100);
+                // Initialize the interface
+                generatedCodesDiv.innerHTML = "";
+                spinner.style.display = 'block';
+                progressContainer.style.display = 'block';
+                updateProgressBar(progressBar, 0);
+                this.disabled = true;
 
-                // Update the interface after completion
-                spinner.classList.add("d-none");
-                generatedCodesDiv.classList.remove("d-none");
-                copyAllButton.classList.remove("d-none");
+                try {
+                    // Start parallel requests
+                    const tokens = await Promise.all([authenticateClient(token, minWaitAfterLogin), authenticateClient(token, minWaitAfterLogin), authenticateClient(token, minWaitAfterLogin), authenticateClient(token, minWaitAfterLogin)]);
+                    updateProgressBar(progressBar, 25);
+                    await Promise.all(tokens.map(token => registerEvent(token, promoId)));
+                    updateProgressBar(progressBar, 50);
+                    const codes = await Promise.all(tokens.map(token => createCode(token, promoId)));
+                    updateProgressBar(progressBar, 100);
 
-                // Add codes to container
-                codes.forEach(code => {
-                    const codeBox = document.createElement('div');
-                    codeBox.className = 'code-box';
-                    codeBox.innerHTML = `
-                        ${code}
-                        <button class="copy-button" data-code="${code}">Copy</button>
-                    `;
-                    generatedCodesDiv.appendChild(codeBox);
-                });
+                    // Update the interface after completion
+                    spinner.style.display = 'none';
+                    generatedCodesDiv.style.display = 'block';
+                    copyAllButton.style.display = 'block';
 
-                // Hide progress bar with delay
-                setTimeout(() => {
-                    progressContainer.style.display = 'none';
-                }, 500);
-            } catch (error) {
-                console.error("Error generating codes:", error);
-                spinner.classList.add("d-none");
-                generatedCodesDiv.textContent = "Error generating codes. Please try again.";
-                generatedCodesDiv.classList.remove("d-none");
-            } finally {
-                generateButton.disabled = false;
-            }
+                    // Add codes to container
+                    codes.forEach(code => {
+                        const codeBox = document.createElement('div');
+                        codeBox.className = 'code-box';
+                        codeBox.innerHTML = 
+                            `${code}`
+                            + `<button class="copy-button" data-code="${code}">Copy</button>`;
+                        generatedCodesDiv.appendChild(codeBox);
+                    });
+
+                    // Hide progress bar with delay
+                    setTimeout(() => {
+                        progressContainer.style.display = 'none';
+                    }, 500);
+                } catch (error) {
+                    console.error("Error generating codes:", error);
+                    spinner.style.display = 'none';
+                    generatedCodesDiv.textContent = "Error generating codes. Please try again.";
+                    generatedCodesDiv.style.display = 'block';
+                } finally {
+                    this.disabled = false;
+                }
+            });
         });
 
-        function updateProgressBar(percentage) {
-            const progressBar = document.getElementById("progress-bar");
+        function updateProgressBar(progressBar, percentage) {
             progressBar.style.width = `${percentage}%`;
             progressBar.setAttribute("aria-valuenow", percentage);
         }
 
-        async function authenticateClient() {
+        async function authenticateClient(token, minWaitAfterLogin) {
             const clientId = generateClientId();
             try {
                 const response = await fetch("https://api.gamepromo.io/promo/login-client", {
@@ -155,23 +195,23 @@
                         "Content-Type": "application/json; charset=utf-8"
                     },
                     body: JSON.stringify({
-                        appToken: "d28721be-fd2d-4b45-869e-9f253b554e50",
+                        appToken: token,
                         clientId: clientId,
                         clientOrigin: "deviceid"
                     })
                 });
                 if (!response.ok) throw new Error("Network response was not ok");
                 const data = await response.json();
-                await new Promise(resolve => setTimeout(resolve, 21000)); // Delay
+                await new Promise(resolve => setTimeout(resolve, minWaitAfterLogin)); // Delay
                 return data.clientToken;
             } catch (error) {
                 console.error("Error logging in client:", error.message);
                 await new Promise(resolve => setTimeout(resolve, 5000)); // Delay
-                return authenticateClient();
+                return authenticateClient(token, minWaitAfterLogin);
             }
         }
 
-        async function registerEvent(token) {
+        async function registerEvent(token, promoId) {
             let attempts = 0;
             while (attempts < 10) {
                 try {
@@ -182,7 +222,7 @@
                             "Content-Type": "application/json; charset=utf-8"
                         },
                         body: JSON.stringify({
-                            promoId: "43e35910-c168-4634-ad4f-52fd764a843f",
+                            promoId: promoId,
                             eventId: generateEventId(),
                             eventOrigin: "undefined"
                         })
@@ -191,7 +231,7 @@
                     const data = await response.json();
                     if (data.hasCode) return;
                     attempts++;
-                    updateProgressBar(25 + (attempts * 2.5));
+                    updateProgressBar(progressBar, 25 + (attempts * 2.5));
                     await new Promise(resolve => setTimeout(resolve, 20000)); // Delay
                 } catch (error) {
                     console.error("Error registering event:", error.message);
@@ -201,7 +241,7 @@
             throw new Error("Maximum number of event registration attempts exceeded");
         }
 
-        async function createCode(token) {
+        async function createCode(token, promoId) {
             while (true) {
                 try {
                     const response = await fetch("https://api.gamepromo.io/promo/create-code", {
@@ -211,7 +251,7 @@
                             "Content-Type": "application/json; charset=utf-8"
                         },
                         body: JSON.stringify({
-                            promoId: "43e35910-c168-4634-ad4f-52fd764a843f"
+                            promoId: promoId
                         })
                     });
                     if (!response.ok) throw new Error("Network response was not ok");
@@ -239,24 +279,28 @@
         }
 
         // Copy code
-        document.getElementById("generated-codes").addEventListener("click", function(event) {
-            if (event.target.classList.contains("copy-button")) {
-                const code = event.target.getAttribute("data-code");
-                navigator.clipboard.writeText(code).then(() => {
-                    alert(`Code "${code}" copied to clipboard.`);
-                }).catch(err => {
-                    console.error("Error copying code:", err);
-                });
-            }
+        document.querySelectorAll(".generated-codes").forEach(container => {
+            container.addEventListener("click", function(event) {
+                if (event.target.classList.contains("copy-button")) {
+                    const code = event.target.getAttribute("data-code");
+                    navigator.clipboard.writeText(code).then(() => {
+                        alert(`Code "${code}" copied to clipboard.`);
+                    }).catch(err => {
+                        console.error("Error copying code:", err);
+                    });
+                }
+            });
         });
 
         // Copy all codes
-        document.getElementById("copy-all-button").addEventListener("click", function() {
-            const codes = Array.from(document.querySelectorAll(".code-box")).map(box => box.textContent.trim().split('\n')[0]);
-            navigator.clipboard.writeText(codes.join('\n')).then(() => {
-                alert("All codes copied to clipboard.");
-            }).catch(err => {
-                console.error("Error copying all codes:", err);
+        document.querySelectorAll(".copy-all-button").forEach(button => {
+            button.addEventListener("click", function() {
+                const codes = Array.from(this.previousElementSibling.querySelectorAll(".code-box")).map(box => box.textContent.trim().split('\n')[0]);
+                navigator.clipboard.writeText(codes.join('\n')).then(() => {
+                    alert("All codes copied to clipboard.");
+                }).catch(err => {
+                    console.error("Error copying all codes:", err);
+                });
             });
         });
     </script>
