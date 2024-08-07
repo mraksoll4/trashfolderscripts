@@ -76,6 +76,8 @@
             color: green;
             font-size: 14px;
         }
+
+        /* donation section code */
         .donation-section {
             margin-top: 40px;
             text-align: center;
@@ -149,8 +151,8 @@
         <button class="copy-all-button" style="display: none;">Copy all</button>
     </div>
 
+    <!-- Donation section code -->
     <div class="donation-section">
-        <h2>Support Us with Cryptocurrency</h2>
     
         <div class="donation-item">
             <div class="network-title">Bitcoin:</div>
@@ -160,7 +162,7 @@
             </div>
         </div>
         <div class="donation-item">
-            <div class="network-title">USDT TRX20:</div>
+            <div class="network-title">USDT TRC20:</div>
             <div class="donation-box">
                 <span>TDKQPYTPt3zuAWSYx9FqVujcCKWLmxLuam</span>
                 <button class="copy-button" data-code="TDKQPYTPt3zuAWSYx9FqVujcCKWLmxLuam">Copy</button>
@@ -396,6 +398,7 @@
             });
         });
 
+        //donate section code. 
         document.querySelectorAll(".donation-box .copy-button").forEach(button => {
             button.addEventListener("click", function() {
                 const code = this.getAttribute("data-code");
