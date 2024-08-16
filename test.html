@@ -162,6 +162,17 @@
         <button class="copy-all-button" style="display: none;">Copy all</button>
     </div>
 
+    <div class="game-section" id="twerk">
+        <h2>Twerk</h2>
+        <button class="generate-button">Generate 4 codes</button>
+        <div class="spinner"></div>
+        <div class="progress-container">
+            <div class="progress-bar" aria-valuenow="0"></div>
+        </div>
+        <div class="generated-codes"></div>
+        <button class="copy-all-button" style="display: none;">Copy all</button>
+    </div>
+
     <!-- Donation section code -->
     <div class="donation-section">
     
@@ -200,11 +211,12 @@
     </div>
     <script>
         const gameData = {
-            bike: { token: "d28721be-fd2d-4b45-869e-9f253b554e50", promoId: "43e35910-c168-4634-ad4f-52fd764a843f", minWaitAfterLogin: 21000 },
-            cube: { token: "d1690a07-3780-4068-810f-9b5bbf2931b2", promoId: "b4170868-cef0-424f-8eb9-be0622e8e8e3", minWaitAfterLogin: 21000 },
-            clone: { token: "74ee0b5b-775e-4bee-974f-63e7f4d5bacb", promoId: "fe693b26-b342-4159-8808-15e3ff7f8767", minWaitAfterLogin: 120000 },
-            train: { token: "82647f43-3f87-402d-88dd-09a90025313f", promoId: "c4480ac7-e178-4973-8061-9ed5b2e17954", minWaitAfterLogin: 120000 },
-            merge: { token: "8d1cc2ad-e097-4b86-90ef-7a27e19fb833", promoId: "dc128d28-c45b-411c-98ff-ac7726fbaea4", minWaitAfterLogin: 120000 }
+            bike: { token: "d28721be-fd2d-4b45-869e-9f253b554e50", promoId: "43e35910-c168-4634-ad4f-52fd764a843f", minWaitAfterLogin: 21e3 },
+            cube: { token: "d1690a07-3780-4068-810f-9b5bbf2931b2", promoId: "b4170868-cef0-424f-8eb9-be0622e8e8e3", minWaitAfterLogin: 21e3 },
+            clone: { token: "74ee0b5b-775e-4bee-974f-63e7f4d5bacb", promoId: "fe693b26-b342-4159-8808-15e3ff7f8767", minWaitAfterLogin: 12e4 },
+            train: { token: "82647f43-3f87-402d-88dd-09a90025313f", promoId: "c4480ac7-e178-4973-8061-9ed5b2e17954", minWaitAfterLogin: 12e4 },
+            merge: { token: "8d1cc2ad-e097-4b86-90ef-7a27e19fb833", promoId: "dc128d28-c45b-411c-98ff-ac7726fbaea4", minWaitAfterLogin: 2e4 },
+            twerk: { token: "61308365-9d16-4040-8bb0-2f4a4c69074c", promoId: "61308365-9d16-4040-8bb0-2f4a4c69074c", minWaitAfterLogin: 2e4 }
         };
 
         const words = ["Catching up with the hamsters...", "Looking for scissors...", "Shear Hamsters...", "Hamsters are gathering..."];
@@ -292,7 +304,7 @@
                     body: JSON.stringify({
                         appToken: token,
                         clientId: clientId,
-                        clientOrigin: "deviceid"
+                        clientOrigin: "android"
                     })
                 });
                 if (!response.ok) throw new Error("Network response was not ok");
