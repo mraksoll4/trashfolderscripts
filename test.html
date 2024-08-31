@@ -206,6 +206,29 @@
         <button class="copy-all-button" style="display: none;">Copy all</button>
     </div>
 
+    <div class="game-section" id="zoopolis">
+        <h2>Zoopolis</h2>
+        <button class="generate-button">Generate 4 codes</button>
+        <div class="spinner"></div>
+        <div class="progress-container">
+            <div class="progress-bar" aria-valuenow="0"></div>
+        </div>
+        <div class="generated-codes"></div>
+        <button class="copy-all-button" style="display: none;">Copy all</button>
+    </div>
+	
+    <div class="game-section" id="gang">
+        <h2>Gang</h2>
+        <button class="generate-button">Generate 4 codes</button>
+        <div class="spinner"></div>
+        <div class="progress-container">
+            <div class="progress-bar" aria-valuenow="0"></div>
+        </div>
+        <div class="generated-codes"></div>
+        <button class="copy-all-button" style="display: none;">Copy all</button>
+    </div>
+
+
     <!-- Donation section code -->
     <div class="donation-section">
     
@@ -244,10 +267,15 @@
     </div>
     <script>
         const gameData = {
-            bike: {
-                token: "d28721be-fd2d-4b45-869e-9f253b554e50",
-                promoId: "43e35910-c168-4634-ad4f-52fd764a843f",
-                minWaitAfterLogin: 21e3
+            zoopolis: {
+                token: "b2436c89-e0aa-4aed-8046-9b0515e1c46b",
+                promoId: "b2436c89-e0aa-4aed-8046-9b0515e1c46b",
+                minWaitAfterLogin: 31e3,
+            },
+            gang: {
+                token: "b6de60a0-e030-48bb-a551-548372493523",
+                promoId: "c7821fa7-6632-482c-9635-2bd5798585f9",
+                minWaitAfterLogin: 4e4,
             },
             cube: {
                 token: "d1690a07-3780-4068-810f-9b5bbf2931b2",
@@ -273,11 +301,6 @@
                 token: "2aaf5aee-2cbc-47ec-8a3f-0962cc14bc71",
                 promoId: "2aaf5aee-2cbc-47ec-8a3f-0962cc14bc71",
                 minWaitAfterLogin: 12e4
-            },
-            mud: {
-                token: "8814a785-97fb-4177-9193-ca4180ff9da8",
-                promoId: "8814a785-97fb-4177-9193-ca4180ff9da8",
-                minWaitAfterLogin: 2e4
             },
             mow: {
                 token: "ef319a80-949a-492e-8ee0-424fb5fc20a6",
