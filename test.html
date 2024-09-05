@@ -108,8 +108,8 @@
         <h2>Your IP Address: <span id="ip-address">Loading...</span></h2>
     </div>
 
-    <div class="game-section" id="cube">
-        <h2>Cube</h2>
+    <div class="game-section" id="fluff">
+        <h2>Fluff</h2>
         <button class="generate-button">Generate 4 codes</button>
         <div class="spinner"></div>
         <div class="progress-container">
@@ -119,8 +119,19 @@
         <button class="copy-all-button" style="display: none;">Copy all</button>
     </div>
 
-    <div class="game-section" id="polysphere">
-        <h2>Polysphere</h2>
+    <div class="game-section" id="trio">
+        <h2>Trio</h2>
+        <button class="generate-button">Generate 4 codes</button>
+        <div class="spinner"></div>
+        <div class="progress-container">
+            <div class="progress-bar" aria-valuenow="0"></div>
+        </div>
+        <div class="generated-codes"></div>
+        <button class="copy-all-button" style="display: none;">Copy all</button>
+    </div>
+
+    <div class="game-section" id="mow">
+        <h2>Mow</h2>
         <button class="generate-button">Generate 4 codes</button>
         <div class="spinner"></div>
         <div class="progress-container">
@@ -141,8 +152,8 @@
         <button class="copy-all-button" style="display: none;">Copy all</button>
     </div>
 
-    <div class="game-section" id="merge">
-        <h2>Merge</h2>
+    <div class="game-section" id="cube">
+        <h2>Cube</h2>
         <button class="generate-button">Generate 4 codes</button>
         <div class="spinner"></div>
         <div class="progress-container">
@@ -152,30 +163,9 @@
         <button class="copy-all-button" style="display: none;">Copy all</button>
     </div>
 
-    <div class="game-section" id="twerk">
-        <h2>Twerk</h2>
-        <button class="generate-button">Generate 4 codes</button>
-        <div class="spinner"></div>
-        <div class="progress-container">
-            <div class="progress-bar" aria-valuenow="0"></div>
-        </div>
-        <div class="generated-codes"></div>
-        <button class="copy-all-button" style="display: none;">Copy all</button>
-    </div>
-	
-    <div class="game-section" id="mow">
-        <h2>Mow</h2>
-        <button class="generate-button">Generate 4 codes</button>
-        <div class="spinner"></div>
-        <div class="progress-container">
-            <div class="progress-bar" aria-valuenow="0"></div>
-        </div>
-        <div class="generated-codes"></div>
-        <button class="copy-all-button" style="display: none;">Copy all</button>
-    </div>
-	
-    <div class="game-section" id="cafe">
-        <h2>Cafe</h2>
+
+    <div class="game-section" id="merge">
+        <h2>Merge</h2>
         <button class="generate-button">Generate 4 codes</button>
         <div class="spinner"></div>
         <div class="progress-container">
@@ -195,9 +185,9 @@
         <div class="generated-codes"></div>
         <button class="copy-all-button" style="display: none;">Copy all</button>
     </div>
-	
-    <div class="game-section" id="gang">
-        <h2>Gang</h2>
+
+    <div class="game-section" id="twerk">
+        <h2>Twerk</h2>
         <button class="generate-button">Generate 4 codes</button>
         <div class="spinner"></div>
         <div class="progress-container">
@@ -207,6 +197,16 @@
         <button class="copy-all-button" style="display: none;">Copy all</button>
     </div>
 
+    <div class="game-section" id="polysphere">
+        <h2>Polysphere</h2>
+        <button class="generate-button">Generate 4 codes</button>
+        <div class="spinner"></div>
+        <div class="progress-container">
+            <div class="progress-bar" aria-valuenow="0"></div>
+        </div>
+        <div class="generated-codes"></div>
+        <button class="copy-all-button" style="display: none;">Copy all</button>
+    </div>
 
     <!-- Donation section code -->
     <div class="donation-section">
@@ -290,7 +290,18 @@
                 token: "bc0971b8-04df-4e72-8a3e-ec4dc663cd11",
                 promoId: "bc0971b8-04df-4e72-8a3e-ec4dc663cd11",
                 minWaitAfterLogin: 31e3
+            },
+            fluff: {
+                token: "112887b0-a8af-4eb2-ac63-d82df78283d9",
+                promoId: "112887b0-a8af-4eb2-ac63-d82df78283d9",
+                minWaitAfterLogin: 12e4,
+            },
+            trio: {
+                token: "e68b39d2-4880-4a31-b3aa-0393e7df10c7",
+                promoId: "e68b39d2-4880-4a31-b3aa-0393e7df10c7",
+                minWaitAfterLogin: 12e4,
             }
+
         };
         const words = ["Catching up with the hamsters...", "Looking for scissors...", "Shear Hamsters...", "Hamsters are gathering..."];
         function showRandomWord(spinner) {
