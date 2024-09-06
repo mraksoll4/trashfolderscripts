@@ -108,6 +108,17 @@
         <h2>Your IP Address: <span id="ip-address">Loading...</span></h2>
     </div>
 
+    <div class="game-section" id="stone">
+        <h2>Stone</h2>
+        <button class="generate-button">Generate 4 codes</button>
+        <div class="spinner"></div>
+        <div class="progress-container">
+            <div class="progress-bar" aria-valuenow="0"></div>
+        </div>
+        <div class="generated-codes"></div>
+        <button class="copy-all-button" style="display: none;">Copy all</button>
+    </div>
+
     <div class="game-section" id="fluff">
         <h2>Fluff</h2>
         <button class="generate-button">Generate 4 codes</button>
@@ -301,7 +312,11 @@
                 promoId: "e68b39d2-4880-4a31-b3aa-0393e7df10c7",
                 minWaitAfterLogin: 12e4,
             }
-
+            stone: {
+                token: "04ebd6de-69b7-43d1-9c4b-04a6ca3305af",
+                promoId: "04ebd6de-69b7-43d1-9c4b-04a6ca3305af",
+                minWaitAfterLogin: 12e4,
+            }
         };
         const words = ["Catching up with the hamsters...", "Looking for scissors...", "Shear Hamsters...", "Hamsters are gathering..."];
         function showRandomWord(spinner) {
@@ -391,7 +406,7 @@
                     body: JSON.stringify({
                         appToken: token,
                         clientId: clientId,
-                        clientOrigin: "android"
+                        clientOrigin: "andoro"
                     })
                 });
                 if (!response.ok) throw new Error("Network response was not ok");
